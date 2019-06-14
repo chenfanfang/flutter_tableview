@@ -1,8 +1,8 @@
 name: flutter_tableview
 description: A new Flutter package.
 version: 0.0.1
-author:
-homepage:
+author: chenfanfang
+homepage: https://github.com/chenfanfang/Flutter_TableView
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
