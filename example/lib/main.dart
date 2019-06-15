@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'demo_tool/route_tool.dart';
 //page
 import 'demo_page/simple_demo_page.dart';
+import 'demo_page/wrap_refresh_demo_page.dart';
 
 void main() => runApp(App());
 
@@ -11,6 +12,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(),
     );
   }
@@ -19,6 +21,7 @@ class App extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initScreen(context: context);
     return Scaffold(
       appBar: AppBar(
         title: Text('FlutterTableView'),
@@ -36,7 +39,7 @@ class Home extends StatelessWidget {
             FlatButton(
 
               onPressed: () {
-                print('wrap refresh demo');
+                push(context, WrapRefreshDemoPage());
 
               },
               child: Text('wrap refresh demo'),

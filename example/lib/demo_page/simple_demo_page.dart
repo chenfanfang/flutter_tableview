@@ -30,26 +30,36 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
   }
 
   Widget _sectionHeaderBuilder(BuildContext context, int section) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: 16),
-      color: Color.fromRGBO(220, 220, 220, 1),
-      height: 100,
-      child: Text('I am section header -> section:$section'),
+    return InkWell(
+      onTap: (){
+        print('click section header. -> section:$section');
+      },
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: 16),
+        color: Color.fromRGBO(220, 220, 220, 1),
+        height: 100,
+        child: Text('I am section header -> section:$section'),
+      ),
     );
   }
 
   Widget _cellBuilder(BuildContext context, int section, int row) {
-    return Container(
-      padding: EdgeInsets.only(left: 16),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-        color: Color.fromRGBO(240, 240, 240, 1),
-      ))),
-      height: 50,
-      child: Text('I am cell -> section:$section  row$row'),
+    return InkWell(
+      onTap: (){
+        print('click cell item. -> section:$section row:$row');
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 16),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+          color: Color.fromRGBO(240, 240, 240, 1),
+        ))),
+        height: 50,
+        child: Text('I am cell -> section:$section  row$row'),
+      ),
     );
   }
 

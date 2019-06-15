@@ -10,12 +10,13 @@ typedef Widget CellBuilder(BuildContext context, int section, int row);
 typedef double CellHeight(BuildContext context, int section, int row);
 typedef double SectionHeaderHeight(BuildContext context, int section);
 
-const String ErorrFlagBegin = '\n\n\n====================FlutterTableView  Error========================\n\n\n\n';
+const String ErorrFlagBegin =
+    '\n\n\n====================FlutterTableView  Error========================\n\n\n\n';
 
-const String ErorrFlagEnd =   '\n\n\n\n\n==================================================================\n\n\n\n.';
+const String ErorrFlagEnd =
+    '\n\n\n\n\n==================================================================\n\n\n\n.';
 
 class FlutterTableView extends StatefulWidget {
-
   FlutterTableView({
     @required this.sectionCount,
     @required this.rowCountAtSection,
@@ -28,35 +29,37 @@ class FlutterTableView extends StatefulWidget {
     this.physics,
     this.shrinkWrap = false,
     this.padding = const EdgeInsets.all(0.0),
-    this.cacheExtent = 30.0,
+    this.cacheExtent = 50.0,
     this.backgroundColor = Colors.transparent,
   })  : assert(
-  (sectionCount != null && sectionCount > 0),
-  '$ErorrFlagBegin sectionCount must > 0 and could not be null. $ErorrFlagEnd',
-  ),
-        assert(
-        (rowCountAtSection != null),
-        '$ErorrFlagBegin function rowCountAtSection could not be null. $ErorrFlagEnd',
+          (sectionCount != null && sectionCount > 0),
+          '$ErorrFlagBegin sectionCount must > 0 and could not be null. $ErorrFlagEnd',
         ),
         assert(
-        (sectionHeaderBuilder != null),
-        '$ErorrFlagBegin function sectionHeaderBuilder could not be null. $ErorrFlagEnd',
+          (rowCountAtSection != null),
+          '$ErorrFlagBegin function rowCountAtSection could not be null. $ErorrFlagEnd',
         ),
         assert(
-        (cellBuilder != null),
-        '$ErorrFlagBegin function cellBuilder could not be null. $ErorrFlagEnd',
+          (sectionHeaderBuilder != null),
+          '$ErorrFlagBegin function sectionHeaderBuilder could not be null. $ErorrFlagEnd',
         ),
         assert(
-        (sectionHeaderHeight != null),
-        '$ErorrFlagBegin function sectionHeaderHeight could not be null. $ErorrFlagEnd',
+          (cellBuilder != null),
+          '$ErorrFlagBegin function cellBuilder could not be null. $ErorrFlagEnd',
         ),
         assert(
-        (cellHeight != null),
-        '$ErorrFlagBegin function cellHeight could not be null. $ErorrFlagEnd',
+          (sectionHeaderHeight != null),
+          '$ErorrFlagBegin function sectionHeaderHeight could not be null. $ErorrFlagEnd',
+        ),
+        assert(
+          (cellHeight != null),
+          '$ErorrFlagBegin function cellHeight could not be null. $ErorrFlagEnd',
         );
 
   @override
-  _FlutterTableViewState createState() => _FlutterTableViewState();
+  _FlutterTableViewState createState() {
+    return _FlutterTableViewState();
+  }
 
   /// How many section.
   final int sectionCount;
@@ -108,14 +111,12 @@ class _FlutterTableViewState extends State<FlutterTableView> {
   List<int> sectionTotalWidgetCountList = List();
   ScrollController scrollController;
   ListView listView;
-  Widget listViewFatherWidget;
-
+  bool insideSetStateFlag = false;
 
   ////////////////////////////////////////////////////////////////////
   //                         init function
   ////////////////////////////////////////////////////////////////////
   void _initBaseData() {
-
     this.totalItemCount = 0;
     this.sectionHeaderList.clear();
     this.sectionTotalWidgetCountList.clear();
@@ -155,9 +156,8 @@ class _FlutterTableViewState extends State<FlutterTableView> {
   }
 
   void _initScrollController() {
-
     this.scrollController = this.widget.controller;
-    if(this.scrollController == null) {
+    if (this.scrollController == null) {
       this.scrollController = ScrollController();
     }
 
@@ -193,37 +193,41 @@ class _FlutterTableViewState extends State<FlutterTableView> {
   //                       create listView
   ////////////////////////////////////////////////////////////////////
   void _createListView() {
-    if(this.listView == null) {
-      this.listView = ListView.builder(
-        controller: this.scrollController,
-        physics: AlwaysScrollableScrollPhysics(),
-        shrinkWrap: false,
-        itemBuilder: (BuildContext context, int index) {
-          Widget itemWidget;
-          RowSectionModel model = this._getRowSectionModel(index);
-          double height;
-          if (model.row == 0 && model.haveHeaderWidget) {
-            itemWidget = this.sectionHeaderList[model.section].headerWidget;
-            height = this.widget.sectionHeaderHeight(context, model.section);
-          } else {
-            int row = model.haveHeaderWidget == false ? model.row : model.row - 1;
-            itemWidget = this.widget.cellBuilder(context, model.section, row);
-            height = this.widget.cellHeight(context, model.section, row);
-          }
-
-          return ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: height,
-              maxHeight: height,
-            ),
-            child: itemWidget,
-          );
-        },
-        itemCount: this.totalItemCount,
-      );
+    if(this.insideSetStateFlag == false) {
+      this._initBaseData();
     }
-  }
 
+    this.insideSetStateFlag = false;
+
+    this.listView = ListView.builder(
+      controller: this.scrollController,
+      physics: this.widget.physics ?? AlwaysScrollableScrollPhysics(),
+      shrinkWrap: this.widget.shrinkWrap,
+      cacheExtent: this.widget.cacheExtent,
+      itemBuilder: (BuildContext context, int index) {
+        Widget itemWidget;
+        RowSectionModel model = this._getRowSectionModel(index);
+        double height;
+        if (model.row == 0 && model.haveHeaderWidget) {
+          itemWidget = this.sectionHeaderList[model.section].headerWidget;
+          height = this.widget.sectionHeaderHeight(context, model.section);
+        } else {
+          int row = model.haveHeaderWidget == false ? model.row : model.row - 1;
+          itemWidget = this.widget.cellBuilder(context, model.section, row);
+          height = this.widget.cellHeight(context, model.section, row);
+        }
+
+        return ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: height,
+            maxHeight: height,
+          ),
+          child: itemWidget,
+        );
+      },
+      itemCount: this.totalItemCount,
+    );
+  }
 
   ////////////////////////////////////////////////////////////////////
   //                      tool function
@@ -231,8 +235,8 @@ class _FlutterTableViewState extends State<FlutterTableView> {
   RowSectionModel _getRowSectionModel(int index) {
     int passCount = 0;
     for (int section = 0;
-    section < this.sectionTotalWidgetCountList.length;
-    section++) {
+        section < this.sectionTotalWidgetCountList.length;
+        section++) {
       int currentSectionWidgetCount = this.sectionTotalWidgetCountList[section];
       if (index >= passCount && index < passCount + currentSectionWidgetCount) {
         int row = index - passCount;
@@ -277,6 +281,7 @@ class _FlutterTableViewState extends State<FlutterTableView> {
     }
 
     if (needSetState == true) {
+      this.insideSetStateFlag = true;
       setState(() {});
     }
   }
@@ -289,28 +294,28 @@ class _FlutterTableViewState extends State<FlutterTableView> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    this.scrollController.dispose();
+
+    if (this.widget.controller == null) {
+      this.scrollController.dispose();
+    }
   }
 
   @override
   void initState() {
-    this._initBaseData();
     this._initScrollController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (this.listView == null) {
-      this._createListView();
+    this._createListView();
+    Widget listViewFatherWidget;
+    if (this.widget.listViewFatherWidgetBuilder != null) {
+      listViewFatherWidget =
+          this.widget.listViewFatherWidgetBuilder(context, this.listView);
     }
 
-    if(this.widget.listViewFatherWidgetBuilder != null && this.listViewFatherWidget == null) {
-      this.listViewFatherWidget = this.widget.listViewFatherWidgetBuilder(context, this.listView);
-    }
-
-    Widget listViewWidget = this.listViewFatherWidget ?? this.listView;
-
+    Widget listViewWidget = listViewFatherWidget ?? this.listView;
 
     if (this.currentHeaderModel != null &&
         this.currentHeaderModel.headerWidget != null) {
@@ -328,7 +333,10 @@ class _FlutterTableViewState extends State<FlutterTableView> {
               left: 0.0,
               right: 0.0,
               height: this.currentHeaderModel.height,
-              child: this.currentHeaderModel.headerWidget,
+              child: Container(
+                color: Colors.white,
+                child: this.currentHeaderModel.headerWidget,
+              ),
             ),
           ],
         ),
@@ -348,7 +356,6 @@ class _FlutterTableViewState extends State<FlutterTableView> {
     );
   }
 }
-
 
 ////////////////////////////////////////////////////////////////////
 //                          model class

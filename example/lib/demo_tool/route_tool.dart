@@ -30,3 +30,22 @@ void pop(BuildContext context, {var callBackValue}) {
 void popToPage(BuildContext context, String pageClassName) {
   Navigator.of(context).popUntil(ModalRoute.withName(pageClassName));
 }
+
+
+
+
+
+double screenWidth;
+double screenHeight;
+double pxRatio;
+MediaQueryData mediaQuery;
+
+void initScreen(
+    {@required BuildContext context}) {
+
+  if(mediaQuery == null) {
+    mediaQuery = MediaQuery.of(context);
+    screenWidth = mediaQuery.size.width;
+    screenHeight = mediaQuery.size.height;
+  }
+}
