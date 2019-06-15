@@ -15,7 +15,7 @@ class WrapRefreshDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('simple demo'),
+        title: Text('wrap refresh demo'),
       ),
       body: WrapRefreshDemoPageBody(),
     );
