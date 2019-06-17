@@ -136,7 +136,7 @@ FlutterTableView(
 ```
 
 gif:<br/>
-![wrap_refresh_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-842791f8f08ca4ab.gif?imageMogr2/auto-orient/strip)
+![wrap_refresh_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-842791f8f08ca4ab.gif)
 
 ## License
 MIT License
