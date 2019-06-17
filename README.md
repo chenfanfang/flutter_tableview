@@ -19,6 +19,10 @@ class SimpleDemoPageBody extends StatefulWidget {
 }
 
 class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
+  // How many section.
+  int sectionCount = 3;
+
+  // Get row count.
   int _rowCountAtSection(int section) {
     if (section == 0) {
       return 5;
@@ -29,9 +33,10 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
     }
   }
 
+  // Section header widget builder.
   Widget _sectionHeaderBuilder(BuildContext context, int section) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         print('click section header. -> section:$section');
       },
       child: Container(
@@ -44,9 +49,10 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
     );
   }
 
+  // cell item widget builder.
   Widget _cellBuilder(BuildContext context, int section, int row) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         print('click cell item. -> section:$section row:$row');
       },
       child: Container(
@@ -63,10 +69,12 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
     );
   }
 
+  // Each section header height;
   double _sectionHeaderHeight(BuildContext context, int section) {
     return 50.0;
   }
 
+  // Each cell item widget height.
   double _cellHeight(BuildContext context, int section, int row) {
     return 50.0;
   }
@@ -74,6 +82,7 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //FlutterTableView
       child: FlutterTableView(
         sectionCount: 3,
         rowCountAtSection: _rowCountAtSection,
