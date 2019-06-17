@@ -98,6 +98,8 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
 
 
 ![demo_picture](https://raw.githubusercontent.com/chenfanfang/flutter_tableView/master/example/demo_picture/simpleDemo.png)
+
+gif:
 ![simple_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-b85a99f485c5a25f.gif?imageMogr2/auto-orient/strip)
 
 
@@ -131,6 +133,7 @@ FlutterTableView(
 // detail usage please download demo
 ```
 
+gif:
 ![wrap_refresh_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-842791f8f08ca4ab.gif?imageMogr2/auto-orient/strip)
 
 ## License
