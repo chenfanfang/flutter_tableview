@@ -96,11 +96,12 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
 }
 ```
 
+
+
 ![demo_picture](https://raw.githubusercontent.com/chenfanfang/flutter_tableView/master/example/demo_picture/simpleDemo.png)
 
 
 
-##License
 
-
+## License
 MIT License
