@@ -36,7 +36,7 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
       },
       child: Container(
         alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(left: 16),
+        padding: EdgeInsets.only(left: 16.0),
         color: Color.fromRGBO(220, 220, 220, 1),
         height: 100,
         child: Text('I am section header -> section:$section'),
@@ -50,14 +50,14 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
         print('click cell item. -> section:$section row:$row');
       },
       child: Container(
-        padding: EdgeInsets.only(left: 16),
+        padding: EdgeInsets.only(left: 16.0),
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
           color: Color.fromRGBO(240, 240, 240, 1),
         ))),
-        height: 50,
+        height: 50.0,
         child: Text('I am cell -> section:$section  row$row'),
       ),
     );
