@@ -21,11 +21,11 @@ class SimpleDemoPageBody extends StatefulWidget {
 class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
   int _rowCountAtSection(int section) {
     if (section == 0) {
-      return 10;
+      return 5;
     } else if (section == 1) {
-      return 20;
+      return 10;
     } else {
-      return 30;
+      return 20;
     }
   }
 
@@ -64,19 +64,11 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
   }
 
   double _sectionHeaderHeight(BuildContext context, int section) {
-    if(section == 0) {
-      return 50;
-    }
-    else if (section == 1) {
-      return 70;
-    }
-    else {
-      return 100;
-    }
+    return 50.0;
   }
 
   double _cellHeight(BuildContext context, int section, int row) {
-    return 50;
+    return 50.0;
   }
 
   @override
