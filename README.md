@@ -1,5 +1,5 @@
 # flutter_tableview
-[![pub package](https://img.shields.io/badge/pub-v1.0.0-orange.svg)](https://github.com/chenfanfang/flutter_tableView)
+[![pub package](https://img.shields.io/badge/pub-v1.0.1-orange.svg)](https://github.com/chenfanfang/flutter_tableView)
 
 A flutter widget like iOS UITableview. let listView with section header and each section header will hover at the top.
 
@@ -8,7 +8,7 @@ A flutter widget like iOS UITableview. let listView with section header and each
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      flutter_tableView: ^1.0.0
+      flutter_tableView: ^1.0.1
 
 ## How to use
 
