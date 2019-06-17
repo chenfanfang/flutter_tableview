@@ -84,7 +84,7 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
     return Container(
       //FlutterTableView
       child: FlutterTableView(
-        sectionCount: 3,
+        sectionCount: sectionCount,
         rowCountAtSection: _rowCountAtSection,
         sectionHeaderBuilder: _sectionHeaderBuilder,
         cellBuilder: _cellBuilder,
