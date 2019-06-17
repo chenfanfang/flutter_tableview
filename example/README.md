@@ -1,16 +1,117 @@
-# example
 
-A new Flutter application.
+## usage 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+```dart
+class SimpleDemoPageBody extends StatefulWidget {
+  @override
+  _SimpleDemoPageBodyState createState() => _SimpleDemoPageBodyState();
+}
 
-A few resources to get you started if this is your first Flutter project:
+class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
+  // How many section.
+  int sectionCount = 3;
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  // Get row count.
+  int _rowCountAtSection(int section) {
+    if (section == 0) {
+      return 5;
+    } else if (section == 1) {
+      return 10;
+    } else {
+      return 20;
+    }
+  }
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+  // Section header widget builder.
+  Widget _sectionHeaderBuilder(BuildContext context, int section) {
+    return InkWell(
+      onTap: () {
+        print('click section header. -> section:$section');
+      },
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: 16.0),
+        color: Color.fromRGBO(220, 220, 220, 1),
+        height: 100,
+        child: Text('I am section header -> section:$section'),
+      ),
+    );
+  }
+
+  // cell item widget builder.
+  Widget _cellBuilder(BuildContext context, int section, int row) {
+    return InkWell(
+      onTap: () {
+        print('click cell item. -> section:$section row:$row');
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 16.0),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+          color: Color.fromRGBO(240, 240, 240, 1),
+        ))),
+        height: 50.0,
+        child: Text('I am cell -> section:$section  row$row'),
+      ),
+    );
+  }
+
+  // Each section header height;
+  double _sectionHeaderHeight(BuildContext context, int section) {
+    return 50.0;
+  }
+
+  // Each cell item widget height.
+  double _cellHeight(BuildContext context, int section, int row) {
+    return 50.0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //FlutterTableView
+      child: FlutterTableView(
+        sectionCount: 3,
+        rowCountAtSection: _rowCountAtSection,
+        sectionHeaderBuilder: _sectionHeaderBuilder,
+        cellBuilder: _cellBuilder,
+        sectionHeaderHeight: _sectionHeaderHeight,
+        cellHeight: _cellHeight,
+      ),
+    );
+  }
+}
+```
+
+
+
+##### If you want to wrap listView with other widget (such as [flutter_easyrefresh](https://github.com/xuelongqy/flutter_easyrefresh))
+
+
+
+```dart
+FlutterTableView(
+        sectionCount: this.dataSourceList.length,
+        rowCountAtSection: _rowCountAtSection,
+        sectionHeaderBuilder: _sectionHeaderBuilder,
+        cellBuilder: _cellBuilder,
+        sectionHeaderHeight: _sectionHeaderHeight,
+        cellHeight: _cellHeight,
+        listViewFatherWidgetBuilder: (BuildContext context, Widget listView) {
+          return EasyRefresh(
+            key: _easyRefreshKey,
+            limitScroll: true,
+            refreshHeader: MaterialHeader(key: _headerKey),
+            refreshFooter: MaterialFooter(key: _footerKey),
+            onRefresh: () async {},
+            loadMore: () async {},
+            child: listView,
+          );
+        },
+      ),
+      
+// detail usage please download demo
+```

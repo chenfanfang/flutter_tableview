@@ -97,9 +97,39 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
 ```
 
 
-
 ![demo_picture](https://raw.githubusercontent.com/chenfanfang/flutter_tableView/master/example/demo_picture/simpleDemo.png)
 
+
+
+
+
+##### If you want to wrap listView with other widget (such as [flutter_easyrefresh](https://github.com/xuelongqy/flutter_easyrefresh))
+
+
+
+```dart
+FlutterTableView(
+        sectionCount: this.dataSourceList.length,
+        rowCountAtSection: _rowCountAtSection,
+        sectionHeaderBuilder: _sectionHeaderBuilder,
+        cellBuilder: _cellBuilder,
+        sectionHeaderHeight: _sectionHeaderHeight,
+        cellHeight: _cellHeight,
+        listViewFatherWidgetBuilder: (BuildContext context, Widget listView) {
+          return EasyRefresh(
+            key: _easyRefreshKey,
+            limitScroll: true,
+            refreshHeader: MaterialHeader(key: _headerKey),
+            refreshFooter: MaterialFooter(key: _footerKey),
+            onRefresh: () async {},
+            loadMore: () async {},
+            child: listView,
+          );
+        },
+      ),
+      
+// detail usage please download demo
+```
 
 
 
