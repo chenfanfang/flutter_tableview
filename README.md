@@ -1,3 +1,5 @@
+# [中文](https://www.jianshu.com/p/031a36e99196)
+
 # flutter_tableview
 [![pub package](https://img.shields.io/badge/pub-v1.0.1-orange.svg)](https://github.com/chenfanfang/flutter_tableView)
 
@@ -99,7 +101,7 @@ class _SimpleDemoPageBodyState extends State<SimpleDemoPageBody> {
 
 ![demo_picture](https://raw.githubusercontent.com/chenfanfang/flutter_tableView/master/example/demo_picture/simpleDemo.png)
 
-gif:
+gif:<br/>
 ![simple_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-b85a99f485c5a25f.gif?imageMogr2/auto-orient/strip)
 
 
@@ -133,7 +135,7 @@ FlutterTableView(
 // detail usage please download demo
 ```
 
-gif:
+gif:<br/>
 ![wrap_refresh_demo.gif](https://upload-images.jianshu.io/upload_images/1594675-842791f8f08ca4ab.gif?imageMogr2/auto-orient/strip)
 
 ## License
