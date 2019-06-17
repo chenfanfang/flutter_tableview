@@ -1,7 +1,7 @@
 name: flutter_tableview
-description: A new Flutter package.
+description: A flutter widget like iOS UITableview. let listView with section header and each section header will hover at the top.
 version: 1.0.0
-author: chenfanfang
+author: chenfanfang <493336001@qq.com>
 homepage: https://github.com/chenfanfang/Flutter_TableView
 
 environment:

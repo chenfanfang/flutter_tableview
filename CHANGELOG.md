@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.0] - 2019-06-15
 
-* TODO: Describe initial release.
+* flutter_tableview first version published.
