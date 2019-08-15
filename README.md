@@ -10,7 +10,7 @@ A flutter widget like iOS UITableview. let listView with section header and each
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      flutter_tableView: ^1.0.1
+      flutter_tableview: ^1.0.1
 
 ## How to use
 
